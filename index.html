@@ -20,46 +20,7 @@
             text-align: center;
         }
 
-        /* --- ESTILOS PARA LA PANTALLA DE BIENVENIDA --- */
-        #welcome-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            z-index: 100;
-        }
-
-        .greeting {
-            font-size: 3em;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        #reveal-button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            background-color: #ff4500;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-
-        #reveal-button:hover {
-            background-color: #e63900;
-        }
-        /* --- FIN ESTILOS DE BIENVENIDA --- */
-
+        
         .container {
             width: 100%;
             height: 100%;
@@ -69,7 +30,231 @@
             justify-content: center;
         }
         
-        .bouquet {
+        .bouque/* --- ESTILOS GENERALES Y FUENTES --- */
+body {
+    margin: 0;
+    padding: 0;
+    /* Fondo muy oscuro para que los colores vibrantes resalten */
+    background: #101010; 
+    color: #fff;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- PANTALLA DE BIENVENIDA --- */
+#welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fondo con un degradado sutil */
+    background: linear-gradient(135deg, #222 0%, #000 100%); 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.greeting {
+    /* Color Naranja Hot Wheels para el mensaje principal */
+    color: #FF6700; 
+    font-size: 3.5em; /* Un poco más grande */
+    margin-bottom: 10px;
+    font-weight: 800; /* Extra bold */
+    text-shadow: 0 0 15px rgba(255, 103, 0, 0.5); /* Resplandor */
+    letter-spacing: 2px;
+}
+
+.greeting-message {
+    font-size: 1.4em;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+#reveal-button {
+    padding: 15px 40px;
+    font-size: 1.4em;
+    cursor: pointer;
+    background-color: #007bff; /* Azul vibrante */
+    color: white;
+    border: 3px solid #FF6700; /* Borde naranja */
+    border-radius: 10px;
+    margin-top: 30px;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+#reveal-button:hover {
+    background-color: #0056b3; 
+    transform: scale(1.05); /* Efecto al pasar el ratón */
+}
+/* --- FIN ESTILOS DE BIENVENIDA --- */
+
+/* --- ESTILOS DEL RAMO (La Sorpresa) --- */
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.bouquet {
+    position: relative;
+    width: 350px; /* Un poco más ancho */
+    height: 450px; /* Un poco más alto */
+    margin: auto;
+}
+
+.car {
+    /* Mantenemos la animación */
+    position: absolute;
+    width: 100px; /* Un poco más grandes */
+    opacity: 0;
+    animation: float 5s infinite ease-in-out;
+}
+
+/* Mantenemos las posiciones */
+.car:nth-child(1) { left: 5%; animation-delay: 0s; }
+.car:nth-child(2) { left: 40%; animation-delay: 1s; }
+.car:nth-child(3) { left: 75%; animation-delay: 2s; }
+.car:nth-child(4) { left: 20%; animation-delay: 3s; }
+.car:nth-child(5) { left: 60%; animation-delay: 4s; }
+
+@keyframes float {
+    0% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
+    50% { bottom: 180px; opacity: 1; transform: translateY(-30px) scale(1); }
+    100% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
+}
+
+.message {
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD700; /* Dorado para el mensaje final */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+/* --- ESTILOS GENERALES Y FUENTES --- */
+body {
+    margin: 0;
+    padding: 0;
+    /* Fondo muy oscuro para que los colores vibrantes resalten */
+    background: #101010; 
+    color: #fff;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- PANTALLA DE BIENVENIDA --- */
+#welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fondo con un degradado sutil */
+    background: linear-gradient(135deg, #222 0%, #000 100%); 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.greeting {
+    /* Color Naranja Hot Wheels para el mensaje principal */
+    color: #FF6700; 
+    font-size: 3.5em; /* Un poco más grande */
+    margin-bottom: 10px;
+    font-weight: 800; /* Extra bold */
+    text-shadow: 0 0 15px rgba(255, 103, 0, 0.5); /* Resplandor */
+    letter-spacing: 2px;
+}
+
+.greeting-message {
+    font-size: 1.4em;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+#reveal-button {
+    padding: 15px 40px;
+    font-size: 1.4em;
+    cursor: pointer;
+    background-color: #007bff; /* Azul vibrante */
+    color: white;
+    border: 3px solid #FF6700; /* Borde naranja */
+    border-radius: 10px;
+    margin-top: 30px;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+#reveal-button:hover {
+    background-color: #0056b3; 
+    transform: scale(1.05); /* Efecto al pasar el ratón */
+}
+/* --- FIN ESTILOS DE BIENVENIDA --- */
+
+/* --- ESTILOS DEL RAMO (La Sorpresa) --- */
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.bouquet {
+    position: relative;
+    width: 350px; /* Un poco más ancho */
+    height: 450px; /* Un poco más alto */
+    margin: auto;
+}
+
+.car {
+    /* Mantenemos la animación */
+    position: absolute;
+    width: 100px; /* Un poco más grandes */
+    opacity: 0;
+    animation: float 5s infinite ease-in-out;
+}
+
+/* Mantenemos las posiciones */
+.car:nth-child(1) { left: 5%; animation-delay: 0s; }
+.car:nth-child(2) { left: 40%; animation-delay: 1s; }
+.car:nth-child(3) { left: 75%; animation-delay: 2s; }
+.car:nth-child(4) { left: 20%; animation-delay: 3s; }
+.car:nth-child(5) { left: 60%; animation-delay: 4s; }
+
+@keyframes float {
+    0% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
+    50% { bottom: 180px; opacity: 1; transform: translateY(-30px) scale(1); }
+    100% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
+}
+
+.message {
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD700; /* Dorado para el mensaje final */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+            t {
             position: relative;
             width: 300px;
             height: 400px;
