@@ -3,325 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramo Digital Hot Wheels</title>
-    
+    <title>¡Toca para abrir!</title>
     <style>
+        /* --- ESTILOS GENERALES Y FONDO --- */
         body {
-            margin: 0;
-            padding: 0;
+            background-color: #0d0d0d;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            background: #111;
-            color: #fff;
+            margin: 0;
             overflow: hidden;
             font-family: sans-serif;
+            color: #ffffff;
             text-align: center;
+            cursor: pointer;
         }
 
-        
-        .container {
-            width: 100%;
-            height: 100%;
+        /* --- TEXTO TOCA PARA ABRIR --- */
+        .tap-text {
+            position: absolute;
+            top: 15%;
+            font-size: 5vw;
+            font-weight: 700;
+            opacity: 1;
+            transition: opacity 0.5s;
+            animation: pulse 1.5s infinite;
+            z-index: 10;
+        }
+
+        /* --- CONTENEDOR DEL RAMO (ANTES DE TOCAR) --- */
+        .bouquet-container {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            transform: translateY(10%);
+        }
+
+        /* Simulación del papel de regalo */
+        .wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60vw;
+            max-width: 350px;
+            height: 60vh;
+            max-height: 500px;
+            background: linear-gradient(to top, rgba(50, 50, 50, 0.7), rgba(20, 20, 20, 0.8));
+            clip-path: polygon(30% 0, 70% 0, 100% 100%, 0% 100%);
+            z-index: 2;
+        }
+
+        /* Logo Hot Wheels con brillo neón */
+        .hotwheels-logo {
+            width: 80vw;
+            max-width: 450px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 100, 0, 0.5));
+            animation: flicker 1s infinite alternate;
+            z-index: 5;
+        }
+
+        /* --- ESTILOS DE LOS TRES AUTOS --- */
+        .car-box {
+            width: 25vw;
+            max-width: 120px;
+            height: auto;
+            position: absolute;
+            z-index: 7;
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.5));
+            transform: rotate(5deg);
+        }
+
+        #car-1 {
+            bottom: -5%;
+            left: -30%; /* Ligeramente a la izquierda */
+            transform: rotate(-10deg);
+        }
+
+        #car-2 {
+            bottom: -15%;
+            transform: rotate(0deg); /* Centrada y más abajo */
+        }
+
+        #car-3 {
+            bottom: -5%;
+            right: -30%; /* Ligeramente a la derecha */
+            transform: rotate(10deg);
         }
         
-        .bouque/* --- ESTILOS GENERALES Y FUENTES --- */
-body {
-    margin: 0;
-    padding: 0;
-    /* Fondo muy oscuro para que los colores vibrantes resalten */
-    background: #101010; 
-    color: #fff;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif; /* Fuente moderna */
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- PANTALLA DE BIENVENIDA --- */
-#welcome-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Fondo con un degradado sutil */
-    background: linear-gradient(135deg, #222 0%, #000 100%); 
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
-
-.greeting {
-    /* Color Naranja Hot Wheels para el mensaje principal */
-    color: #FF6700; 
-    font-size: 3.5em; /* Un poco más grande */
-    margin-bottom: 10px;
-    font-weight: 800; /* Extra bold */
-    text-shadow: 0 0 15px rgba(255, 103, 0, 0.5); /* Resplandor */
-    letter-spacing: 2px;
-}
-
-.greeting-message {
-    font-size: 1.4em;
-    color: #ccc;
-    margin-bottom: 30px;
-}
-
-#reveal-button {
-    padding: 15px 40px;
-    font-size: 1.4em;
-    cursor: pointer;
-    background-color: #007bff; /* Azul vibrante */
-    color: white;
-    border: 3px solid #FF6700; /* Borde naranja */
-    border-radius: 10px;
-    margin-top: 30px;
-    transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-}
-
-#reveal-button:hover {
-    background-color: #0056b3; 
-    transform: scale(1.05); /* Efecto al pasar el ratón */
-}
-/* --- FIN ESTILOS DE BIENVENIDA --- */
-
-/* --- ESTILOS DEL RAMO (La Sorpresa) --- */
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.bouquet {
-    position: relative;
-    width: 350px; /* Un poco más ancho */
-    height: 450px; /* Un poco más alto */
-    margin: auto;
-}
-
-.car {
-    /* Mantenemos la animación */
-    position: absolute;
-    width: 100px; /* Un poco más grandes */
-    opacity: 0;
-    animation: float 5s infinite ease-in-out;
-}
-
-/* Mantenemos las posiciones */
-.car:nth-child(1) { left: 5%; animation-delay: 0s; }
-.car:nth-child(2) { left: 40%; animation-delay: 1s; }
-.car:nth-child(3) { left: 75%; animation-delay: 2s; }
-.car:nth-child(4) { left: 20%; animation-delay: 3s; }
-.car:nth-child(5) { left: 60%; animation-delay: 4s; }
-
-@keyframes float {
-    0% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
-    50% { bottom: 180px; opacity: 1; transform: translateY(-30px) scale(1); }
-    100% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
-}
-
-.message {
-    margin-top: 30px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #FFD700; /* Dorado para el mensaje final */
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-/* --- ESTILOS GENERALES Y FUENTES --- */
-body {
-    margin: 0;
-    padding: 0;
-    /* Fondo muy oscuro para que los colores vibrantes resalten */
-    background: #101010; 
-    color: #fff;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif; /* Fuente moderna */
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- PANTALLA DE BIENVENIDA --- */
-#welcome-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Fondo con un degradado sutil */
-    background: linear-gradient(135deg, #222 0%, #000 100%); 
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
-
-.greeting {
-    /* Color Naranja Hot Wheels para el mensaje principal */
-    color: #FF6700; 
-    font-size: 3.5em; /* Un poco más grande */
-    margin-bottom: 10px;
-    font-weight: 800; /* Extra bold */
-    text-shadow: 0 0 15px rgba(255, 103, 0, 0.5); /* Resplandor */
-    letter-spacing: 2px;
-}
-
-.greeting-message {
-    font-size: 1.4em;
-    color: #ccc;
-    margin-bottom: 30px;
-}
-
-#reveal-button {
-    padding: 15px 40px;
-    font-size: 1.4em;
-    cursor: pointer;
-    background-color: #007bff; /* Azul vibrante */
-    color: white;
-    border: 3px solid #FF6700; /* Borde naranja */
-    border-radius: 10px;
-    margin-top: 30px;
-    transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-}
-
-#reveal-button:hover {
-    background-color: #0056b3; 
-    transform: scale(1.05); /* Efecto al pasar el ratón */
-}
-/* --- FIN ESTILOS DE BIENVENIDA --- */
-
-/* --- ESTILOS DEL RAMO (La Sorpresa) --- */
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.bouquet {
-    position: relative;
-    width: 350px; /* Un poco más ancho */
-    height: 450px; /* Un poco más alto */
-    margin: auto;
-}
-
-.car {
-    /* Mantenemos la animación */
-    position: absolute;
-    width: 100px; /* Un poco más grandes */
-    opacity: 0;
-    animation: float 5s infinite ease-in-out;
-}
-
-/* Mantenemos las posiciones */
-.car:nth-child(1) { left: 5%; animation-delay: 0s; }
-.car:nth-child(2) { left: 40%; animation-delay: 1s; }
-.car:nth-child(3) { left: 75%; animation-delay: 2s; }
-.car:nth-child(4) { left: 20%; animation-delay: 3s; }
-.car:nth-child(5) { left: 60%; animation-delay: 4s; }
-
-@keyframes float {
-    0% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
-    50% { bottom: 180px; opacity: 1; transform: translateY(-30px) scale(1); }
-    100% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.6); }
-}
-
-.message {
-    margin-top: 30px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #FFD700; /* Dorado para el mensaje final */
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-            t {
-            position: relative;
-            width: 300px;
-            height: 400px;
-            margin: auto;
-        }
-
-        .car {
+        /* --- CONTENIDO DE SORPRESA --- */
+        .surprise-container {
+            display: none;
+            z-index: 15;
             position: absolute;
-            width: 80px;
-            opacity: 0;
-            animation: float 5s infinite ease-in-out;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .surprise-text {
+            font-size: 4vw;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        
+        .message-text {
+            font-size: 3vw;
+            color: #FF69B4;
+            font-weight: bold;
         }
 
-        /* distintas posiciones y retrasos */
-        .car:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .car:nth-child(2) { left: 40%; animation-delay: 1s; }
-        .car:nth-child(3) { left: 70%; animation-delay: 2s; }
-        .car:nth-child(4) { left: 25%; animation-delay: 3s; }
-        .car:nth-child(5) { left: 55%; animation-delay: 4s; }
-
-        @keyframes float {
-            0% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.5); }
-            50% { bottom: 150px; opacity: 1; transform: translateY(-30px) scale(1); }
-            100% { bottom: 0; opacity: 0; transform: translateY(0) scale(0.5); }
+        /* Keyframes de las animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .message {
-            margin-top: 20px;
-            font-size: 24px;
+        @keyframes flicker {
+            0% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.9)) drop-shadow(0 0 60px rgba(255, 100, 0, 0.6)); }
+            100% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        
-        <div id="welcome-screen">
-            <p class="greeting">¡Feliz Día 30 de Septiembre!</p>
-            <p class="greeting-message">¡Tu regalo digital está esperando! 🎉</p>
-            <button id="reveal-button">Haz clic para verlo</button>
-        </div>
-        
-        <div id="bouquet-content" style="display: none;">
-            <div class="bouquet">
-                <img class="car" src="" alt="Hot Wheels car 1">
-                <img class="car" src="https://ddkjx5kezodfx.cloudfront.net/Weyop/Libreria%20San%20Pablo/Store/Productos/SAN%20PABLO/1729524552_TUFUVEVMLS0tQXV0b3MtZGUtQ2FycmVyYS1Ib3QtV2hlZWxzLXgtMS1VbmlkYWQtLS1Db2QtNjI0Njg=.webp" alt="Hot Wheels car 2">
-                <img class="car" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbY4PZJbOV_ckKATwY97dGQXI5y4X5KJktZ3pjwYKklA&s=10" alt="Hot Wheels car 3">
-                <img class="car" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ88rj3nRDtWV89jp6ZSkpbTW1B04MDHeEuMg&usqp=CAU" alt="Hot Wheels car 4">
-                <img class="car" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTppAqgS5E02hdRf7VLyiMokGk9OZ5gWl7gjtgLRj1FjQ&s=10" alt="Hot Wheels car 5">
-            </div>
-            <div class="message">¡Un Ramo Hot Wheels para vos! 🏎️🎉</div>
-            <div class="message">Te quiero muchísimo Nachito ❤️</div>
-        </div>
-        
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('reveal-button');
-            const bouquet = document.getElementById('bouquet-content');
-            const welcome = document.getElementById('welcome-screen');
 
-            button.addEventListener('click', function() {
-                welcome.style.display = 'none';
-                bouquet.style.display = 'flex';
-            });
+    <div class="tap-text" id="tapText">Toca para abrir</div>
+
+    <a href="#" class="bouquet-container" id="bouquetContainer">
+        <div class="wrapper"></div>
+        
+        <img class="hotwheels-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Hot_Wheels_Logo.svg/1024px-Hot_Wheels_Logo.svg.png" alt="Logo Hot Wheels">
+
+        <img class="car-box" id="car-1" 
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTppAqgS5E02hdRf7VLyiMokGk9OZ5gWl7gjtgLRj1FjQ&s=10" 
+             alt="Hot Wheels Car 1">
+             
+        <img class="car-box" id="car-2" 
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbY4PZJbOV_ckKATwY97dGQXI5y4X5KJktZ3pjwYKklA&s=10" 
+             alt="Hot Wheels Car 2">
+             
+        <img class="car-box" id="car-3" 
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ88rj3nRDtWV89jp6ZSkpbTW1B04MDHeEuMg&usqp=CAU" 
+             alt="Hot Wheels Car 3">
+    </a>
+
+    <div class="surprise-container" id="surpriseContainer">
+        <p class="surprise-text">¡SORPRESA!</p>
+        <p class="message-text">Te quiero muchísimo, Nachito 💘</p>
+    </div>
+
+    <script>
+        const tapText = document.getElementById('tapText');
+        const bouquetContainer = document.getElementById('bouquetContainer');
+        const wrapper = document.querySelector('.wrapper');
+        const surpriseContainer = document.getElementById('surpriseContainer');
+        const hotwheelsLogo = document.querySelector('.hotwheels-logo');
+
+        bouquetContainer.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // 1. Oculta el texto y detiene el brillo
+            tapText.style.opacity = '0';
+            bouquetContainer.style.pointerEvents = 'none';
+            hotwheelsLogo.style.animation = 'none'; 
+
+            // 2. Hace que el papel se desvanezca
+            wrapper.style.transition = 'opacity 1s, transform 1s';
+            wrapper.style.opacity = '0';
+            
+            // 3. Muestra el contenido final
+            setTimeout(() => {
+                surpriseContainer.style.display = 'block';
+                bouquetContainer.style.display = 'none'; 
+            }, 500);
         });
     </script>
 </body>
-  </html>
-  
+</html>
